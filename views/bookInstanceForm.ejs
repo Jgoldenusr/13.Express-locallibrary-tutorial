@@ -1,0 +1,87 @@
+<h1><%= title %></h1>
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="book">Book:</label>
+    <select
+      class="form-control"
+      id="book"
+      type="select"
+      placeholder="Select book"
+      name="book"
+      required="true"
+    >
+      <!-- prettier-ignore -->
+      <% 
+        data.books.sort(function(a, b) {
+          let textA = a.title.toUpperCase();
+          let textB = b.title.toUpperCase(); 
+          return (textA < textB) ? -1 :(textA > textB) ? 1 : 0;
+        });
+      %> 
+      <% data.books.forEach(function(book){ %>
+      <!-- prettier-ignore -->
+      <option value= <%= book._id %>
+        selected= <%= data.selectedBookId ? (data.selectedBookId === book._id.toString() ? 'selected' : false) : false; %>>
+        <%= book.title %>
+      </option>
+      <%});%>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="imprint">Imprint:</label>
+    <!-- prettier-ignore -->
+    <input
+        class="form-control"
+        id="imprint"
+        type="text"
+        placeholder="Publisher and date information"
+        name="imprint"
+        required="true"
+        value=<%= data.bookInstance ? data.bookInstance.imprint : ''; %>
+    >
+  </div>
+  <div class="form-group">
+    <label for="due_back">Date when book available:</label>
+    <!-- prettier-ignore -->
+    <input
+        class="form-control"
+        id="due_back"
+        type="date"
+        name="due_back"
+        required="true"
+        value=<%= data.bookInstance ? data.bookInstance.due_back : '' ; %>
+    >
+  </div>
+  <div class="form-group">
+    <label for="status">Status:</label>
+    <select
+      class="form-control"
+      id="status"
+      type="select"
+      placeholder="Select status"
+      name="status"
+      required="true"
+    >
+    <!-- prettier-ignore -->
+      <option value="Maintenance" selected= <%= data.bookInstance ? (data.bookInstance.status === "Maintenance "? 
+      'selected' : false) : false; %>>Maintenance</option>
+    <!-- prettier-ignore -->
+      <option value="Available" selected= <%= data.bookInstance ? (data.bookInstance.status === "Available "? 
+      'selected' : false) : false; %>>Available</option>
+    <!-- prettier-ignore -->
+      <option value="Loaned" selected= <%= data.bookInstance ? (data.bookInstance.status === "Loaned "? 
+      'selected' : false) : false; %>>Loaned</option>
+    <!-- prettier-ignore -->
+      <option value="Reserved" selected= <%= data.bookInstance ? (data.bookInstance.status === "Reserved "? 
+      'selected' : false) : false; %>>Reserved</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (error) { %>
+<ul>
+  <% error.forEach(function(err){%>
+  <li><%= err.msg %></li>
+</ul>
+<% })}%>

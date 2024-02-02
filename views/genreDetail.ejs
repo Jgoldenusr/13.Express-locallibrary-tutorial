@@ -1,0 +1,16 @@
+<h1><%= data.genre.name %></h1>
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Books</h4>
+  <dl>
+    <% if (data.genreBooks.length > 0) { data.genreBooks.forEach(function(book){%>
+    <!-- prettier-ignore -->
+    <dt><a href= <%= book.url %>><%= book.title %></a></dt>
+    <dd><%= book.summary %></dd>
+    <% })} else { %>
+    <p>This genre has no books.</p>
+    <% }%>
+  </dl>
+</div>
+<hr />
+<p><a href=<%= data.genre.url + "/delete" %>>Delete genre</a></p>
+<p><a href=<%= data.genre.url + "/update" %>>Update genre</a></p>

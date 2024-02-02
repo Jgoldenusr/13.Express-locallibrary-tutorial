@@ -1,0 +1,17 @@
+<h1><%= title + ": " + data._id %></h1>
+
+<p>Do you really want to delete this book instance?</p>
+<form method="POST" action="">
+  <div class="form-group">
+    <!-- prettier-ignore -->
+    <input
+      class="form-control"
+      id="instanceid"
+      type="hidden"
+      name="instanceid"
+      required="true"
+      value= <%= data._id %>
+    />
+  </div>
+  <button class="btn btn-primary" type="submit">Delete</button>
+</form>

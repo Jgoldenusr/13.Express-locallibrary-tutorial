@@ -1,0 +1,40 @@
+<h1>Title: <%= title %></h1>
+<!-- prettier-ignore -->
+<p><strong>Author: </strong><a href=<%= data.book.author.url %>><%= data.book.author.name %></a></p>
+<p><strong>Summary: </strong><%= data.book.summary%></p>
+<p><strong>ISBN: </strong><%= data.book.isbn%></p>
+<p>
+  <strong>Genre: </strong>
+  <% data.book.genre.forEach(function(val, index){%>
+  <!-- prettier-ignore -->
+  <a href=<%= val.url %>><%= val.name %></a>
+  <% if(index < data.book.genre.length - 1){%>, <%}})%>
+  <!-- ^^Nótese la coma, también se cierra el forEach-->
+</p>
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Copies</h4>
+  <% if (data.bookInstances.length > 0) {data.bookInstances.forEach(function(val){%>
+  <hr />
+  <% if (val.status === 'Available') {%>
+  <p class="text-success"><%= val.status %></p>
+  <% } if (val.status === 'Maintenance') {%>
+  <p class="text-danger"><%= val.status %></p>
+  <% } if (val.status === 'Loaned') {%>
+  <p class="text-warning"><%= val.status %></p>
+  <% }%>
+  <p><strong>Imprint: </strong><%= val.imprint %></p>
+  <% if (val.status !== "Available") {%>
+  <p><strong>Due back: </strong><%= val.due_back_formatted %></p>
+  <% }%>
+  <p>
+    <strong>Id :</strong>
+    <!-- prettier-ignore -->
+    <a href=<%= val.url %>><%= val.id %></a>
+  </p>
+  <% })} else {%>
+  <p>There are no copies of this book in the library.</p>
+  <% } %>
+</div>
+<hr />
+<p><a href=<%= data.book.url + "/delete" %>>Delete book</a></p>
+<p><a href=<%= data.book.url + "/update" %>>Update book</a></p>

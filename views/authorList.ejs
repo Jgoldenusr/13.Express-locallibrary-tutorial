@@ -1,0 +1,10 @@
+<h1><%= title %></h1>
+<ul>
+  <% if (data) { data.forEach(function(author){%>
+  <!-- prettier-ignore -->
+  <li><a href= <%= author.url %>><%= author.name %>:</a> 
+    (<%= author.birth_formatted %> - <%= author.death_formatted %>)</li>
+  <% })} else { %>
+  <li>There are no authors.</li>
+  <% }%>
+</ul>

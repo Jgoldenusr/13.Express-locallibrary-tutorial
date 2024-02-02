@@ -1,0 +1,32 @@
+<h1><%= title + ": " + data.author.name %></h1>
+<p>(<%= data.author.birth_formatted %> - <%= data.author.death_formatted %>)</p>
+
+<% if(data.authorBooks.length) { %>
+<p><strong>You need to delete the following books.</strong></p>
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Books</h4>
+  <dl>
+    <% data.authorBooks.forEach(function(book){%>
+    <!-- prettier-ignore -->
+    <dt><a href= <%= book.url %>><%= book.title %></a></dt>
+    <dd><%= book.summary %></dd>
+    <% });%>
+  </dl>
+</div>
+<%} else {%>
+<p>Do you really want to delete this Author?</p>
+<form method="POST" action="">
+  <div class="form-group">
+    <!-- prettier-ignore -->
+    <input
+      class="form-control"
+      id="authorid"
+      type="hidden"
+      name="authorid"
+      required="true"
+      value= <%= data.author._id %>
+    />
+  </div>
+  <button class="btn btn-primary" type="submit">Delete</button>
+</form>
+<%};%>

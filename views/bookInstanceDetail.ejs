@@ -1,0 +1,20 @@
+<h1>ID: <%= data._id %></h1>
+<!-- prettier-ignore -->
+<p><strong>Title: </strong><a href=<%= data.book.url %>><%= data.book.title %></a></p>
+<p><strong>Imprint: </strong><%= data.imprint %></p>
+<p>
+  <strong>Status: </strong>
+  <% if (data.status === 'Available') {%>
+  <span class="text-success"><%= data.status %></span>
+  <% } if (data.status === 'Maintenance' || data.status === 'Reserved') {%>
+  <span class="text-danger"><%= data.status %></span>
+  <% } if (data.status === 'Loaned') {%>
+  <span class="text-warning"><%= data.status %></span>
+  <% }%>
+</p>
+<% if (data.status !== "Available") {%>
+<p><strong>Due back: </strong><%= data.due_back_formatted %></p>
+<% }%>
+<hr />
+<p><a href=<%= data.url + "/delete" %>>Delete instance</a></p>
+<p><a href=<%= data.url + "/update" %>>Update instance</a></p>

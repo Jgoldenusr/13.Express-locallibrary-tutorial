@@ -1,0 +1,23 @@
+<h1><%= title %></h1>
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="name">Genre:</label>
+    <!-- prettier-ignore -->
+    <input
+      class="form-control"
+      id="name"
+      type="text"
+      placeholder="Fantasy, Poetry etc."
+      name="name"
+      value= <%= data ? data.name : ''; %>
+    >
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (error) { %>
+<ul>
+  <% error.forEach(function(err){%>
+  <li><%= err.msg %></li>
+</ul>
+<% })}%>

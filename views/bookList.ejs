@@ -1,0 +1,9 @@
+<h1><%= title %></h1>
+<ul>
+  <% if (data) { data.forEach(function(book){%>
+  <!-- prettier-ignore -->
+  <li><a href= <%= book.url %>><%= book.title %>:</a> (<%= book.author.name %>)</li>
+  <% })} else { %>
+  <li>There are no books.</li>
+  <% }%>
+</ul>

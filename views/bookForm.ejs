@@ -1,0 +1,96 @@
+<h1><%= title %></h1>
+
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <!-- prettier-ignore -->
+    <input
+        class="form-control"
+        id="title"
+        type="text"
+        placeholder="Name of book"
+        name="title"
+        required="true"
+        value=<%= data.book ? data.book.title : ''; %>
+    >
+  </div>
+  <div class="form-group">
+    <label for="author">Author:</label>
+    <select
+      class="form-control"
+      id="author"
+      type="select"
+      placeholder="Select author"
+      name="author"
+      required="true"
+    >
+      <!-- prettier-ignore -->
+      <% 
+      data.authors.sort(function(a, b) {
+        let textA = a.family_name.toUpperCase();
+        let textB = b.family_name.toUpperCase(); 
+        return (textA < textB) ? -1 :(textA > textB) ? 1 : 0;
+      });
+      %> 
+      <% data.authors.forEach(function(author){ if(data.book){ %>
+      <!-- prettier-ignore -->
+      <option value= <%= author._id %>
+        selected= <%= author._id.toString() === data.book.author._id || 
+        author._id.toString() === data.book.author ?
+        'selected' : false; %>> <%= author.name %>
+      </option>
+      <%} else{ %>
+      <!-- prettier-ignore -->
+      <option value= <%= author._id %>> <%= author.name %></option>
+      <%} });%>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="summary">Summary:</label>
+    <textarea
+      class="form-control"
+      id="summary"
+      type="textarea"
+      placeholder="Summary"
+      name="summary"
+      required="true"
+    >
+<%= data.book ? data.book.summary : ''; %></textarea
+    >
+  </div>
+  <div class="form-group">
+    <label for="isbn">ISBN:</label>
+    <!-- prettier-ignore -->
+    <input
+      class="form-control"
+      id="isbn"
+      type="text"
+      placeholder="ISBN13"
+      name="isbn"
+      required="true"
+      value= <%= data.book ? data.book.isbn : ''; %>
+    >
+  </div>
+  <div class="form-group">
+    <label>Genre:</label>
+    <div>
+      <% data.genres.forEach(function(genre){ %>
+      <div style="display: inline; padding-right: 10px">
+        <!-- prettier-ignore -->
+        <input type="checkbox" name="genre" id= <%= genre._id %> value= <%=
+        genre._id %> checked= <%= genre.checked %>>
+        <!-- prettier-ignore -->
+        <label for= <%= genre._id %>> <%= genre.name %> </label>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (error) { %>
+<ul>
+  <% error.forEach(function(err){%>
+  <li><%= err.msg %></li>
+</ul>
+<% })}%>

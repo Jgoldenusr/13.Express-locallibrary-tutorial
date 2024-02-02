@@ -1,0 +1,9 @@
+<h1><%= title %></h1>
+<ul>
+  <% if (data) { data.forEach(function(genre){%>
+  <!-- prettier-ignore -->
+  <li><a href= <%= genre.url %>><%= genre.name %>:</a></li>
+  <% })} else { %>
+  <li>There are no genres.</li>
+  <% }%>
+</ul>

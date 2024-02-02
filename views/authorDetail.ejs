@@ -1,0 +1,18 @@
+<h1>Author: <%= data.author.name %></h1>
+<p>(<%= data.author.birth_formatted %> - <%= data.author.death_formatted %>)</p>
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Books</h4>
+  <dl>
+    <% if (data.authorsBooks.length > 0) { data.authorsBooks.forEach(function(book){%>
+    <!-- prettier-ignore -->
+    <dt><a href= <%= book.url %>><%= book.title %></a></dt>
+    <dd><%= book.summary %></dd>
+    <% })} else { %>
+    <p>This author has no books.</p>
+    <% }%>
+  </dl>
+</div>
+<hr />
+<p><a href=<%= data.author.url + "/delete" %>>Delete author</a></p>
+<p><a href=<%= data.author.url + "/update" %>>Update author</a></p>
+
