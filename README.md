@@ -13,4 +13,4 @@ This project is meant to showcase the NodeJS skills learned so far, mainly:
 
 The page was made following [this](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website) course, but instead of using Pug I used EJS.
 
-You can test the demo [here.](https://jgoldenusr.github.io/11.Shopping-cart/)
+You can test the demo [here.](https://express-locallibrary-tutorial-7dn5.onrender.com)
